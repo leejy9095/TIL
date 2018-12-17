@@ -1,0 +1,13 @@
+ECMA6에서 let, const가 추가 되었다
+
+var은 재선언, 재할당이 모두 가능하다
+
+let은 재선언은 불가능하지만 변수에 재할당이 가능하다
+
+const는 재선언, 재할당 모두 불가능하다.
+
+var 대신 let, const사용이 권장되는건 hoistion 떄문이다
+하지만 let, const가 hoisting이 발생하지 않는건 아니다
+
+var가 function-scoped로 hoisting이 되었다면
+let, const는 block-scoped단위로 hoisting이 일어난다
