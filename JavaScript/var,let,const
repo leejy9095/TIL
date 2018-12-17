@@ -5,9 +5,41 @@ var은 재선언, 재할당이 모두 가능하다
 let은 재선언은 불가능하지만 변수에 재할당이 가능하다
 
 const는 재선언, 재할당 모두 불가능하다.
+그래서 let은 선언하고 나중에 값을 할당이 가능하지만 const 선언과 동시에 값을 할당 해야한다.
+ex)
+let a = 'test';
+let a = 'testtest';  //불가능
+a = 'testtest'  //가능
+
+const a = 'test';
 
 var 대신 let, const사용이 권장되는건 hoistion 떄문이다
 하지만 let, const가 hoisting이 발생하지 않는건 아니다
 
 var가 function-scoped로 hoisting이 되었다면
 let, const는 block-scoped단위로 hoisting이 일어난다
+
+hoisting 이란 끌어올리다 라는뜻인데
+ex)
+console.log(a);
+var a = "test";
+console.log(a);
+
+이때 undefined 와 'test'가 콘솔에 보여진다 밑에서 선언해도 선언자체를 끌어올린것이 hoistiong이다
+
+실제 hoisting이 인식된 상황이다
+var a;
+console.log(a);
+userName = "test";
+console.log(a);
+
+var의 hoisting은 선언만 끌어 올려지고 할당은 끌어올려지지 않는다.
+
+var의 hoisting을 막기 위해서는 use strict(엄격하게 사용)를 사용하면 된다.
+'use strict'
+console.log(a)
+var userName = 'test';
+console.log(a);
+
+첫번째 콘솔에서 not defined 에러가 발생한다
+
