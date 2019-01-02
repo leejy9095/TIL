@@ -1,0 +1,26 @@
+JSONObject는 JSON형태의 데이터를 관리해 주는 메서드이다.
+기본구조 : {String name : Value, String name2 : Value2 ...}
+map타입 처럼 순서가 구분이 안된다.
+그래서 map 형태의 데이터를 리턴받을때 JSONObject를 사용해서 받을수 있다.
+
+JSONArray 는 JSONObject가 들어가는 배열이라고 보면 된다.
+기본구조 : [{String name : Value}, {String name2 : Value2} ...]
+[]안에는 JSONObject 나 String 값 등을 담을 수 있다.
+순서화 되있다. 
+
+ex)전체 사용
+String jsonStr = "{\"members\":["
+                + "{\"name\":\"이이이\",\"age\":\"20\"},"
+                + "{\"name\":\"김김김\",\"age\":\"30\""
+                + "}]}";
+ 
+JSONParser jsonParser = new JSONParser();
+ 
+//JSON데이터를 넣어 JSON Object 로 만들어 준다.
+JSONObject jsonObject = (JSONObject) jsonParser.parse(jsonStr);    //파싱
+JSONArray memberArray = (JSONArray) jsonObject.get("members");
+ 
+JSONObject tempObj = (JSONObject) memberArray.get(2);
+System.out.println("2번째 이름 : "+tempObj.get("name"));
+System.out.println("2번째 이메일 : "+tempObj.get("email"));
+System.out.println("2번째 나이 : "+tempObj.get("age"));
