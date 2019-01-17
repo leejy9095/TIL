@@ -1,0 +1,20 @@
+getParameter
+
+파라미터 값을 넘긴 후 받는 페이지에서 값을 request에서 꺼내올 때 쓰는 메소드이다
+request 영역에 있는 메소드이다
+값이 어떤것이든지 String 형으로 반환한다
+
+ex)
+String test = request.getParameter("testValue");
+
+참고로 request.setParameter()는 없다
+
+getAttribute
+
+scope 영역에 저장된 속성(Attribute)을 꺼내올 떄 쓰는 메소드이다
+Object 타입으로 반환하여준다
+그래서 사용할떄 형변환을 하고 사용해야한다
+
+ex)
+String test = (String)request.getAttribute("testValue");
+List list = (List)request.getAttribute("testValue");
