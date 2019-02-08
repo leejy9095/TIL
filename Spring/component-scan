@@ -1,7 +1,7 @@
 <context:component-scan base-package="패키지 경로 ex)jun.com.intro" />
 
 일일이 빈등록 안하고 빈클래스에 @Component를 이용해 빈 등록 가능
-상위 패키지를 선택하시면 됩니다. 선택된 패키지 및 하위 패키지 전부 스캔
+선택된 패키지 및 하위 패키지 전부 스캔
 autowired할 클래스에 @component로 표시
-다만, Controller, Service 클래스에는 이미 @Controller 라는 Annotation이 있으므로 등록하지 않아도 된다. 
+다만, Controller, Service 클래스에는 이미 @Controller 라는 Annotation이 있으므로 등록하지 않아도 된다.
 @Controller, @Service가 이미 @Component를 상속하기 있기 때문이다
