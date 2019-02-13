@@ -1,5 +1,5 @@
 post
-CharacterEncodingFilter는 Http상에서 주고받는 데이터의 헤더값을 UTF-8로 인코딩
+CharacterEncodingFilter는 Http상에서 주고받는 데이터의 헤더값을 UTF-8로 인코딩 
 
 <filter>
   <filter-name>encodingFilter</filter-name> 
