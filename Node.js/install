@@ -1,0 +1,20 @@
+설치 간단 정리
+
+1. noed.js 윈도우 설치
+https://nodejs.org/ko/
+다운받은 파일 설치 후 환경변수 설정
+
+2. express 버전 확인후 변경
+npm i express-gene
+
+3. 이클립스에서 환경설정에서 express 경로 변경
+nodeeclipse 선택 후
+2번 단계에서 설치한 경로로 변경해준다
+
+4. 프로젝트 다시 생성
+
+5.pakage.json 으로 npm install
+없으면 추가
+있으면 npm install
+
+6.install 하면 node_modules 폴더가 생성된다
