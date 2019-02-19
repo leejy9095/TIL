@@ -5,13 +5,13 @@ https://nodejs.org/ko/
 다운받은 파일 설치 후 환경변수 설정
 
 2. express 버전 확인후 변경
-npm i express-gene
+npm install (또는 그냥 i로해도 된다) express -generator -g
 
 3. 이클립스에서 환경설정에서 express 경로 변경
 nodeeclipse 선택 후
 2번 단계에서 설치한 경로로 변경해준다
 
-4. 프로젝트 다시 생성
+4. 프로젝트 생성
 
 5.pakage.json 으로 npm install
 없으면 추가
