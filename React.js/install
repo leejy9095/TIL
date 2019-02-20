@@ -1,0 +1,5 @@
+설치방법
+1. 명령프롬프트에서 npm install -g create-react-app
+-g 는 global의 약자 전역적 사용위해
+
+
