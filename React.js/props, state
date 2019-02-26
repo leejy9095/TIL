@@ -1,4 +1,56 @@
 props 는 부모 컴포넌트가 자식 컴포넌트에게 주는 값입니다
-자식 컴포넌트에서는 props 를 받아오기만하고 받아온 props 를 직접 수정 할 수 는 없습니다
+자식 컴포넌트에서는 props 를 받아오기만하고 받아온 props 를 직접 수정 할 수 는 없습니다(정적)
 
-state 는 컴포넌트 내부에서 선언하며 내부에서 값을 변경 할 수 있습니다
+state 는 컴포넌트 내부에서 선언하며 내부에서 값을 변경 할 수 있습니다(동적)
+
+props사용법 
+this 키워드를 이용한다
+
+test component 작성
+class TestComponent extends Component {
+  render() {
+    return (
+      <div>
+        <b>{this.props.name}</b> 입니다.
+      </div>
+    );
+  }
+}
+
+
+상위 component에서 아래처럼 작성하고  TestComponent를 import후 실행하면
+return (
+  <TestComponent name="레엑트" />
+)
+
+결과:리엑트 입니다.
+props 값은 name="리엑트" 가된다
+
+defaultProps를 셋팅 할 수 있습니다
+class 안에
+static defaultProps = {
+  name: '기본이름'
+}
+
+class 밖에
+MyName.defaultProps = {
+  name: '기본이름'
+};
+
+단순히 props만 받아와서 보여주는 컴포넌트는 간단하게 함수형 컴포넌트 작성 할 수 있습니다
+import React from 'react';
+
+const TestComponent = ({ name }) => {
+  return (
+    <div>
+      {name} 입니다.
+    </div>
+  );
+};
+
+export default MyName;
+
+
+state 사용법
+
+
