@@ -50,6 +50,7 @@ const TestComponent = ({ name }) => {
 
 export default MyName;
 
+함수형 컴포넌트와 클래스형 컴포넌트의 주요 차이점은 state 와 LifeCycle 이 빠져있다는 점이다
 
 state 사용법
 
