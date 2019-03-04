@@ -53,5 +53,44 @@ export default MyName;
 함수형 컴포넌트와 클래스형 컴포넌트의 주요 차이점은 state 와 LifeCycle 이 빠져있다는 점이다
 
 state 사용법
+컴포넌트의 state 를 정의할 때는 class fields 문법을 사용해서 정의합니다.
+class TestComponent extends Component {
+  state = { //state 정의
+    number: 0
+  }
+  
+  testSetFunc() { //함수 생성
+    this.setState({ //state를 변경하기위해서는 this.setState를 무조건 거쳐야한다
+      number: this.state.number + 1
+    });
+    //위에 this.setState를 아래처럼도 써줄수있다 this.state가 한번더 호출되는것을 막아준다
+    this.setState(
+     (state) => ({
+        number: state.number
+     });
+    //이런식으로도 할수있다
+    const { number } = this.state;
+    this.setState({
+      number: number + 1
+    })
+  );
+  
+   render() {
+    return (
+      <div>
+        <div>값: {this.state.number}</div>        
+        <button onClick={this.testSetFunc}>+</button>   //onclick에 
+      </div>
+    );
+  }
+}
+
+리액트에서는 setState 함수가 호출되면 컴포넌트가 리렌더링 되도록 설계되어있습니다.
+setState는 객체로 전달되는 값만 업데이트를 해줍니다.
+ 리액트에서 이벤트 함수를 설정할때 html 과 다음과 같은 사항이 다릅니다.
+
+onClick의 이벤트이름을 설정 할 때 camelCase 로 설정해주어야 된다
+onclick 은 onClick 등등
+이벤트에 전달해주는 값은 함수 여야 한다
 
 
