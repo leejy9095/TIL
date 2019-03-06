@@ -1,0 +1,86 @@
+컴포넌트가 여러분의 브라우저에서 나타날때, 사라질때, 그리고 업데이트 될 때, 호출되는 API
+
+컴포넌트 초기 생성
+
+constructor(props) {
+  super(props);
+}
+컴포넌트 생성자 함수, 컴포넌트가 새로 만들어질때마다 호출
+
+componentDidMount() {
+ 
+}
+컴포넌트가 화면에 나타나게 됬을떄 호출
+외부 라이브러리 연동: D3, masonry, etc
+컴포넌트에서 필요한 데이터 요청: Ajax, GraphQL, etc
+DOM 에 관련된 작업: 스크롤 설정, 크기 읽어오기 등
+
+컴포넌트 업데이트
+업데이트는 props 의 변화, 그리고 state 의 변화에 따라 결정된다
+
+static getDerivedStateFromProps(nextProps, prevState) {
+  /* ex)
+  if (nextProps.value !== prevState.value) {
+    return { value: nextProps.value };
+  }
+  return null; // null 을 리턴하면 따로 업데이트 할 것은 없다라는 의미
+  */
+}
+props로 받아온 값을 state로 동기화 하는 작업을 할떄 사용
+여기서는 setState 를 하는 것이 아니라 특정 props 가 바뀔 때 설정하고 설정하고 싶은 state 값을 리턴하는 형태로 사용된다
+
+shouldComponentUpdate(nextProps, nextState) {
+  return true;
+}
+컴포넌트를 최적화하는 작업에서 매우 유용하게 사용된다
+Virtual DOM 에 리렌더링 하는것도,불필요할경우엔 방지하기 위해서 shouldComponentUpdate 를 작성한다
+기본적으로 true 반환
+false 하면 업데이트를 안함
+
+getSnapshotBeforeUpdate(prevProps, prevState) { 
+ex) 새 데이터가 상단에 추가되어도 스크롤바를 유지해보겠습니다.
+    scrollHeight 는 전 후를 비교해서 스크롤 위치를 설정하기 위함이고,
+    scrollTop 은, 이 기능이 크롬에 이미 구현이 되어있는데, 
+    이미 구현이 되어있다면 처리하지 않도록 하기 위함입니다.
+    
+  if (prevState.array !== this.state.array) {
+    const {
+      scrollTop, scrollHeight
+    } = this.list;
+
+    // 여기서 반환 하는 값은 componentDidMount 에서 snapshot 값으로 받아올 수 있습니다.
+    return {
+      scrollTop, scrollHeight
+    };
+  }
+}
+DOM 업데이트가 일어나기 직전의 시점입니다
+DOM 변화가 일어나기 직전의 DOM 상태를 가져오고
+여기서 리턴하는 값은 componentDidUpdate 에서 3번째 파라미터로 받아올 수 있게 된다
+
+componentDidUpdate(prevProps, prevState, snapshot) {
+  if (snapshot) {
+    const { scrollTop } = this.list;
+    if (scrollTop !== snapshot.scrollTop) return; // 기능이 이미 구현되어있다면 처리하지 않습니다.
+    const diff = this.list.scrollHeight - snapshot.scrollHeight;
+    this.list.scrollTop += diff;
+  }
+}
+
+componentDidUpdate(prevProps, prevState, snapshot) {
+
+}
+컴포넌트에서 render() 를 호출하고난 다음에 발생한다
+this.props 와 this.state 가 바뀌어있다
+파라미터를 통해 이전의 값인 prevProps 와 prevState 를 조회 할 수 있다
+getSnapshotBeforeUpdate 에서 반환한 snapshot 값은 세번째 값으로 받아온다
+
+컴포넌트 제거
+componentWillUnmount() {
+
+}
+이벤트, setTimeout, 외부 라이브러리 인스턴스 제거
+등록했었던 이벤트를 제거하고, 만약에 setTimeout 을 걸은것이 있다면 clearTimeout 을 통하여 제거를 합니다
+
+
+
