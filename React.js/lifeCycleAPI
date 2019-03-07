@@ -35,7 +35,7 @@ shouldComponentUpdate(nextProps, nextState) {
 컴포넌트를 최적화하는 작업에서 매우 유용하게 사용된다
 Virtual DOM 에 리렌더링 하는것도,불필요할경우엔 방지하기 위해서 shouldComponentUpdate 를 작성한다
 기본적으로 true 반환
-false 하면 업데이트를 안함
+false 하면 업데이트를 안한다
 
 getSnapshotBeforeUpdate(prevProps, prevState) { 
 ex) 새 데이터가 상단에 추가되어도 스크롤바를 유지해보겠습니다.
