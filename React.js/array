@@ -1,0 +1,103 @@
+리액트애서는 state 내부의 값을 직접적으로 수정하면 절대로 안된다 -> 불변성 유지
+push, splice, unshift, pop 같은 내장함수는 배열 자체를 직접 수정하게 되므로 적합하지 않다
+그래서 기존의 배열에 기반하여 새 배열을 만들어내는 함수인 concat, slice, map, filter 같은 함수를 사용해야한다
+
+info 컴포넌트 생성
+import React, { Component } from 'react';
+
+class Info extends Component {
+  static defaultProps = {   //info값이 undefined 일때 값을 받아올수가없어서 기본값 셋팅
+    info: {
+      name: '이름',
+      phone: '010-0000-0000',
+      id: 0
+    }
+  }
+  
+  render() {
+    const style = {
+      border: '1px solid black',
+      padding: '8px',
+      margin: '8px'
+    };
+
+    const {
+      name, phone, id
+    } = this.props.info;    //props로 info객체를 받아와서 렌더링
+    
+    return (
+      <div style={style}>
+        <div><b>{name}</b></div>
+        <div>{phone}</div>
+      </div>
+    );
+  }
+}
+
+export default Info;
+
+infoList 컴포넌트 생성
+import React, { Component } from 'react';
+import Info from './Info';
+
+class InfoList extends Component {
+  static defaultProps = {
+    data: []  //data라는 배열 생성
+  }
+
+  render() {
+    const { data } = this.props;  //props로 data 배열을 가져온다
+    const list = data.map(  //map을 사용해서 변환
+      info => (<Info key={info.id} info={info}/>)  //key는 리액트에서 배열을 렌더링할때 꼭 필요하다, 언제나 고유값이여야 한다
+    );
+
+    return (
+      <div>
+        {list}    
+      </div>
+    );
+  }
+}
+
+export default InfoList;
+
+App
+import React, { Component } from 'react';
+import Form Testfrom './components/TestForm';
+import InfoList from './components/InfoList';
+
+class App extends Component {
+  id = 2
+  state = {
+    information: [
+      {
+        id: 0,
+        name: '김민준',
+        phone: '010-0000-0000'
+      },
+      {
+        id: 1,
+        name: '홍길동',
+        phone: '010-0000-0001'
+      }
+    ]
+  }
+  handleCreate = (data) => {
+    const { information } = this.state;
+    this.setState({
+      information: information.concat({ id: this.id++, ...data })
+    })
+  }
+  render() {
+    return (
+      <div>
+        <TestForm
+          onCreate={this.handleCreate}
+        />
+        <InfoList data={this.state.information}/>
+      </div>
+    );
+  }
+}
+
+export default App;
