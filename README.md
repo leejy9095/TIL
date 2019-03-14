@@ -1,4 +1,5 @@
 # TIL
-Today I Learned
 
-일일 정리 
+#I Learned
+
+#기록 정리
