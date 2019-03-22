@@ -1,0 +1,72 @@
+pom.xml 에 tiles 관련 dependency 추가
+servlet-context.xml 파일에 타일즈 View Resolver 를 추가
+tiles 관련 설정 xml 추가
+기본 레이아웃 jsp 추가
+
+
+servlet-context.xml에 추가
+<bean id="tilesViewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+  <property name="viewClass" value="org.springframework.web.servlet.view.tiles3.TilesView" />
+  <property name="order" value="1" /><!-- 순서를 지정 tiles를 1로줘서 다른 viewResolver가 호출되기전에 먼저 호출한다--> <!--다른곳에서 <property name="order" value="2" />로 order값을 2,3..식으로 준다-->
+</bean>
+     
+<bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+  <property name="definitions">
+    <list>
+      <value>/WEB-INF/tiles/tiles-def.xml</value>
+    </list>
+  </property>
+</bean>
+
+
+tiles.xml설정
+<tiles-definitions>
+ 
+    <!-- (1) -->    
+    <definition name=".login" template="/WEB-INF/jsp/tileLayout/loginLayout.jsp">
+        <put-attribute name="title" value="" />
+        <put-attribute name="header" value="/WEB-INF/jsp/tilesView/header.jsp" />
+        <put-attribute name="menu" value="" />        
+        <put-attribute name="footer" value="" />
+    </definition>
+ 
+    <!-- (2) -->
+    <definition name=".root" template="/WEB-INF/jsp/tileLayout/baseLayout.jsp">
+        <put-attribute name="title" value="" />
+        <put-attribute name="header" value="/WEB-INF/jsp/tilesView/header.jsp" />
+        <put-attribute name="menu" value="/WEB-INF/jsp/tilesView/menu.jsp" />        
+        <put-attribute name="footer" value="/WEB-INF/jsp/tilesView/footer.jsp" />
+    </definition>
+    
+    <!-- (1) -->    
+    <definition name="/login/*" extends=".login"> <!--extends랑 위에 name랑 매치-->
+      <put-attribute name="body" value="/WEB-INF/jsp/login/{1}.jsp" />  <!--위에 /login/*에서 *에 들어오는 값을 {1}과 치환-->
+    </definition>
+ 
+    <!-- (2) -->
+   <definition name="/*/*" extends=".root">      
+      <put-attribute name="body" value="/WEB-INF/jsp/{1}/{2}.jsp" />  <!--/*/* 순서대로 {1}, {2}로 치환-->
+    </definition>
+</tiles-definitions>
+
+레이아웃 jsp
+<body class="wrapper">
+    <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">        
+        <tiles:insertAttribute name="header"/>        
+        <tiles:insertAttribute name="menu" />    
+    </nav>
+     <div id="page-wrapper">
+            <div class="row">                 
+                <tiles:insertAttribute name="body" /> <!--tile.xml에서 만든 body 사용-->                                           
+            </div>
+          
+     </div>
+    
+ 
+    <div class="main_footer">
+        <div class="main_footer-inner">
+            <tiles:insertAttribute name="footer" /> <!--tiles.xml에서 만든 footer 사용-->
+        </div>
+    </div>
+</body>
+
