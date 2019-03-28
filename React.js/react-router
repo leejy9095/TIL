@@ -1,0 +1,71 @@
+해당 react 프로젝트로 이동 
+
+설치 
+//브라우저에서 사용되는 리액트 라우터
+yarn add react-router-dom     
+//프로젝트에서 NODE_PATH 를 사용하여 절대경로로 파일을 불러오기 위하여 환경 변수를 설정 할 때 
+운영체제마다 방식이 다르므로 공통적인 방법으로 설정 할 수 있게 해주는 라이브러리
+yarn add cross-env --dev
+
+프로젝트 루트 경로를 설정 (package.json 파일의 script 부분을 수정)
+"scripts": {
+    "start": "cross-env NODE_PATH=src react-scripts start",
+    "build": "cross-env NODE_PATH=src react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+}
+
+App.js  //어떤 주소로 왔을떄 어떤것을 매핑해줄지 정의
+import React, { Component } from 'react';
+
+class App extends Component {
+    render() {
+        return (
+            <div>
+               <Route exact path="/" component={Home}/>   //Route컴포는트를 사용해서 라우트 설정, 경로를path 값으로 설정
+               <Route path="/about" component={About}/>   //exact는 주어진 경로와 딱 맞아야 설정한 컴포넌트를 보여준다 
+               //위에서 exact를 지우면 /about로 검색했을경우 /about에도 /가 있기때문에 home과 about 컴포넌트가 둘다 보여진다
+            </div>
+        );
+    }
+}
+
+export default App;
+
+Root.js //browserRouter를 적용
+import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
+import App from 'shared/App';
+
+const Root = () => (
+    <BrowserRouter>
+        <App/>
+    </BrowserRouter>
+);
+
+export default Root;
+
+라우트의 경로에 특정 값을 넣는 방법
+1. params
+ <Route path="/about/:name" component={About}/>
+ :name 이런식으로 name라는 이름의 params를 추가
+ 
+ <Switch>
+    <Route path="/about/:name" component={About}/>
+    <Route path="/about" component={About}/>
+ </Switch>
+ 
+ 이런식으로 /about가 겹칠때 Switch를 사용하면 매칭되는 첫번쨰 라우트만 보여준다
+ 먼저 비교 할 라우트를 위에 작성해야한다
+ 
+ exact를 사용해도된다
+ 
+2. url query
+라이브러리 추가
+yarn add query-string
+
+@@@나중에 추가
+
+
+
+
