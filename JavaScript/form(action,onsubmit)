@@ -1,0 +1,6 @@
+form에 action, onsubmit 을 같이 설정하고submit을 실행하면
+
+먼저 action의 경로를 실행후 onsubmit에서 지정한 function을 실행한다
+
+그러나 onsubmit="return test();" 으로 앞에 return 을 넣어주고 실행하면
+onsubmit의 함수를 먼저 실행후 action을 실행한다
